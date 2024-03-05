@@ -10,7 +10,7 @@ const api_keys = process.env.OPENAI_API_KEYs || "";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
-  baseURL: "https://openai.fudan.com/v1",
+  baseURL: "https://openai.fudan.site/v1",
 });
 
 // IMPORTANT! Set the runtime to edge: https://vercel.com/docs/functions/edge-functions/edge-runtime
