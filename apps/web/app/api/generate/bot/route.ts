@@ -10,7 +10,7 @@ const api_keys = process.env.OPENAI_API_KEYs || "";
 
 const openai = new OpenAI({
   // apiKey: process.env.OPENAI_API_KEY || "",
-  baseURL: "https://openai.fudan.site",
+  baseURL: process.env.OPENAI_API_PROXY || "https://api.openai.com",
 });
 
 // IMPORTANT! Set the runtime to edge: https://vercel.com/docs/functions/edge-functions/edge-runtime
@@ -84,7 +84,7 @@ export async function POST(req: Request): Promise<Response> {
           // "Do not reply to questions unrelated to the notes. If there are questions unrelated to the notes, please reply 'Please ask questions related to the notes'",
         },
         {
-          role: "system",
+          role: "user",
           content: `Note content: \n${system}`,
         },
         ...messages,
@@ -103,7 +103,7 @@ export async function POST(req: Request): Promise<Response> {
     // Respond with the stream
     return new StreamingTextResponse(stream);
   } catch (error) {
-    return new Response(`Server error\n${error}`, {
+    return new Response(`Server error: ${error}`, {
       status: 500,
     });
   }
