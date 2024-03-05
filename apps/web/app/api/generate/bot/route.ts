@@ -9,8 +9,8 @@ const api_key = process.env.OPENAI_API_KEY || "";
 const api_keys = process.env.OPENAI_API_KEYs || "";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "",
-  baseURL: "https://openai.fudan.site/v1",
+  // apiKey: process.env.OPENAI_API_KEY || "",
+  baseURL: "https://openai.fudan.site",
 });
 
 // IMPORTANT! Set the runtime to edge: https://vercel.com/docs/functions/edge-functions/edge-runtime
@@ -75,7 +75,7 @@ export async function POST(req: Request): Promise<Response> {
     openai.apiKey = getRandomElement(api_keys.split(",")) || api_key;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-16k",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
